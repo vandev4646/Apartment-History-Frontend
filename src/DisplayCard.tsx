@@ -17,7 +17,7 @@ interface DisplayTrend {
   avg_days_diff: number;
 }
 
-export function DisplayCard2({ data }: { data: DisplayTrend[] }) {
+export function DisplayCard({ data }: { data: DisplayTrend[] }) {
   return (
     <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
       {data.map((stat) => {

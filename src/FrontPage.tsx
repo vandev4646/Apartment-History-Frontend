@@ -15,7 +15,6 @@ import {
 } from "@mantine/core";
 
 import type { DisplayTrend } from "./Interfaces";
-import { DisplayCard } from "./DispalyCard";
 import {
   IconBuilding,
   IconMapPin,
@@ -24,7 +23,7 @@ import {
   IconBuildingSkyscraper,
   IconInfoCircle,
 } from "@tabler/icons-react";
-import { DisplayCard2 } from "./DisplayCard2";
+import { DisplayCard } from "./DisplayCard";
 import "@mantine/core/styles.css";
 
 export function FrontPage() {
@@ -32,14 +31,6 @@ export function FrontPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const pageTheme = createTheme({
-    /*
-    fontFamily: "Inter, system-ui, -apple-system, sans-serif",
-    fontFamilyMonospace: "Monaco, Courier, monospace",
-    headings: {
-      fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif',
-      fontWeight: "700",
-    },
-    */
     fontFamily: "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif",
     fontFamilyMonospace:
       'var(--font-geist-mono), ui-monospace, "SF Mono", monospace',
@@ -195,7 +186,6 @@ export function FrontPage() {
                   fw={isActive ? 700 : 400}
                   styles={{
                     root: {
-                      // Distinct underline & background hover behaviors mimicking site links
                       backgroundColor: isActive ? "#f5f5f5" : "transparent",
                       color: "#1a1a1a",
                       paddingTop: "14px",
@@ -206,7 +196,7 @@ export function FrontPage() {
                       },
                     },
                     label: {
-                      fontFamily: isActive ? "Georgia, serif" : "inherit", // Dynamic editorial emphasis
+                      fontFamily: isActive ? "Georgia, serif" : "inherit",
                       fontSize: "17px",
                     },
                   }}
@@ -296,7 +286,7 @@ export function FrontPage() {
                   No data available for {activeNav}.
                 </Text>
               ) : (
-                <DisplayCard2 data={filteredData} />
+                <DisplayCard data={filteredData} />
               )}
             </Stack>
           </Container>
