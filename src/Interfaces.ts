@@ -1,8 +1,8 @@
-
+//reminder: interface property names are kept short to reduce the amount of data transfered per api call
 export interface DisplayTrend{
-    name: string,
-    avg_openings_val: number,
-    avg_openings_diff: number,
-    avg_days_val: number
-    avg_days_diff: number
+    n: string, //name
+    aov: number, //average opening value
+    aod: number, //average opening difference
+    adv: number //average days vacant value
+    add: number //average days vacant difference
 }

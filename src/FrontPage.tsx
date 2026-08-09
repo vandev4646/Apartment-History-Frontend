@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppShell,
   Stack,
@@ -30,6 +30,12 @@ export function FrontPage() {
   const [activeNav, setActiveNav] = useState("Building");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // States to hold API responses dynamically
+  const [buildingData, setBuildingData] = useState<DisplayTrend[]>([]);
+  const [cityData, setCityData] = useState<DisplayTrend[]>([]);
+  const [companyData, setCompanyData] = useState<DisplayTrend[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const pageTheme = createTheme({
     fontFamily: "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif",
     fontFamilyMonospace:
@@ -44,60 +50,27 @@ export function FrontPage() {
     { label: "About", icon: IconInfoCircle },
   ];
 
-  const cityData: DisplayTrend[] = [
-    {
-      name: "Madison",
-      avg_openings_val: 30,
-      avg_openings_diff: -5,
-      avg_days_val: 20,
-      avg_days_diff: 5,
-    },
-    {
-      name: "Verona",
-      avg_openings_val: 20,
-      avg_openings_diff: 5,
-      avg_days_val: 10,
-      avg_days_diff: -5,
-    },
-    {
-      name: "Middleton",
-      avg_openings_val: 35,
-      avg_openings_diff: 0,
-      avg_days_val: 25,
-      avg_days_diff: -5,
-    },
-  ];
+  useEffect(() => {
+    fetch("http://localhost:3000/combinedData")
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json();
+      })
+      .then((data: DisplayTrend[][]) => {
+        console.log("API Response payload:", data);
 
-  const buildingData: DisplayTrend[] = [
-    {
-      name: "Prairie Crest Apartments",
-      avg_openings_val: 9,
-      avg_openings_diff: -1,
-      avg_days_val: 15,
-      avg_days_diff: 20,
-    },
-    {
-      name: "Lincoln Street Apartments",
-      avg_openings_val: 11,
-      avg_openings_diff: 5,
-      avg_days_val: 20,
-      avg_days_diff: -2,
-    },
-    {
-      name: "Siena Ridge Apartments",
-      avg_openings_val: 5,
-      avg_openings_diff: -2,
-      avg_days_val: 5,
-      avg_days_diff: 2,
-    },
-    {
-      name: "Whispering Hills Apartments",
-      avg_openings_val: 15,
-      avg_openings_diff: 7,
-      avg_days_val: 30,
-      avg_days_diff: 10,
-    },
-  ];
+        if (Array.isArray(data) && data.length >= 2) {
+          setBuildingData(data[0] || []);
+          setCityData(data[1] || []);
+          setCompanyData(data[2] || []);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Frontend fetch error:", error);
+        setIsLoading(false);
+      });
+  }, []);
 
   const getActiveData = (): DisplayTrend[] => {
     switch (activeNav) {
@@ -105,13 +78,15 @@ export function FrontPage() {
         return cityData;
       case "Building":
         return buildingData;
+      case "Company":
+        return companyData;
       default:
         return [];
     }
   };
 
   const filteredData = getActiveData().filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    item.n.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -281,6 +256,10 @@ export function FrontPage() {
                     </Text>
                   </Stack>
                 </Container>
+              ) : isLoading ? (
+                <Text c="dimmed" ta="center" mt="xl">
+                  Loading listing data...
+                </Text>
               ) : filteredData.length == 0 ? (
                 <Text c="dimmed" ta="center" mt="xl">
                   No data available for {activeNav}.

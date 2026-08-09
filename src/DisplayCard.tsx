@@ -8,26 +8,19 @@ import {
   Divider,
 } from "@mantine/core";
 import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons-react";
-
-interface DisplayTrend {
-  name: string;
-  avg_openings_val: number;
-  avg_openings_diff: number;
-  avg_days_val: number;
-  avg_days_diff: number;
-}
+import type { DisplayTrend } from "./Interfaces";
 
 export function DisplayCard({ data }: { data: DisplayTrend[] }) {
   return (
     <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
       {data.map((stat) => {
         // Evaluate trends matching the site's reporting format
-        const isOpeningsUp = stat.avg_openings_diff > 0;
-        const isDaysUp = stat.avg_days_diff > 0;
+        const isOpeningsUp = stat.aod > 0;
+        const isDaysUp = stat.add > 0;
 
         return (
           <Paper
-            key={stat.name}
+            key={stat.n}
             withBorder
             p="xl"
             radius="md"
@@ -48,7 +41,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                   lineHeight: 1.3,
                 }}
               >
-                {stat.name}
+                {stat.n}
               </Text>
 
               <Divider style={{ borderColor: "#f1f3f5" }} />
@@ -67,7 +60,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                       fz="24"
                       style={{ color: "#1a1a1a", letterSpacing: "-1px" }}
                     >
-                      {stat.avg_openings_val}
+                      {stat.aov}
                     </Text>
 
                     {/*Inline Badge */}
@@ -94,7 +87,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                         },
                       }}
                     >
-                      {Math.abs(stat.avg_openings_diff)}%
+                      {Math.abs(stat.aod)}%
                     </Badge>
                   </Group>
 
@@ -115,7 +108,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                       fz="24"
                       style={{ color: "#1a1a1a", letterSpacing: "-1px" }}
                     >
-                      {stat.avg_days_val}
+                      {stat.adv}
                     </Text>
 
                     <Badge
@@ -141,7 +134,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                         },
                       }}
                     >
-                      {Math.abs(stat.avg_days_diff)}%
+                      {Math.abs(stat.add)}%
                     </Badge>
                   </Group>
 
