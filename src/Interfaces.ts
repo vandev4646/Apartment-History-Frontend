@@ -6,3 +6,9 @@ export interface DisplayTrend{
     adv: number //average days vacant value
     add: number //average days vacant difference
 }
+
+export interface APIResponse{
+    success: boolean,
+    source: string,
+    data: [DisplayTrend[], DisplayTrend[], DisplayTrend[]]
+}

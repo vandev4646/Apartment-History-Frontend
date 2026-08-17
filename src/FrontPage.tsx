@@ -14,7 +14,7 @@ import {
   Container,
 } from "@mantine/core";
 
-import type { DisplayTrend } from "./Interfaces";
+import type { APIResponse, DisplayTrend } from "./Interfaces";
 import {
   IconBuilding,
   IconMapPin,
@@ -51,13 +51,15 @@ export function FrontPage() {
   ];
 
   useEffect(() => {
-    fetch("http://localhost:3000/combinedData")
+    fetch("http://35.255.29.139:3000/summary")
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         return res.json();
       })
-      .then((data: DisplayTrend[][]) => {
-        console.log("API Response payload:", data);
+      .then((payload: APIResponse) => {
+        console.log("API Response payload:", payload);
+
+        const data = payload.data;
 
         if (Array.isArray(data) && data.length >= 2) {
           setBuildingData(data[0] || []);
@@ -233,26 +235,33 @@ export function FrontPage() {
                         fontStyle: "italic",
                       }}
                     >
-                      Tracking the evolution of regional housing markets through
-                      data-driven insights.
+                      Making historial apartment listing trends and insights
+                      accessible to the average renter
                     </Text>
 
                     <Divider my="md" color="#eef0f2" />
 
                     <Text size="lg" style={{ lineHeight: 1.7 }}>
-                      Welcome to the Apartment Listing History archive. This
-                      platform serves as a comprehensive repository monitoring
-                      historical availability, optimal pricing, and leasing
-                      cycles across properties, municipalities, and managing
-                      enterprises.
+                      The goal of this site is to equip renters with information
+                      about pricing and vacancy trends for their apartment
+                      complex.
                     </Text>
 
                     <Text size="lg" style={{ lineHeight: 1.7 }}>
-                      By evaluating metrics such as average active openings and
-                      duration on market, our analytical tools equip landlords,
-                      investors, and municipal planners with the empirical data
-                      necessary to understand market velocity and broader
-                      regional housing trends.
+                      This is a hobby / passion project. So if you have a
+                      suggestion, find a bug, or want to see your apartment
+                      building on the list, drop me a line at
+                      v.c.elzen@gmail.com. OR if you are awesome and want to
+                      contribute, you can check out the steps below on how to do
+                      that. - Check out this video on how to use beautiful soup
+                      to scrap apartement data and add it to this site. - Link
+                      to the scraper repos written instructions on how to
+                      contribute can be found here.
+                    </Text>
+
+                    <Text size="lg" style={{ lineHeight: 1.7 }}>
+                      Coming soon! The ability to click into a building and see
+                      trends per unit type.
                     </Text>
                   </Stack>
                 </Container>
