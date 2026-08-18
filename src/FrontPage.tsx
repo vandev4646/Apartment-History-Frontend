@@ -51,9 +51,9 @@ export function FrontPage() {
   ];
 
   useEffect(() => {
-    fetch("http://35.255.29.139:3000/summary")
+    fetch("https://api.vacancyinsights.com/summary")
       .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        if (!res.ok) throw new Error(`HTTPS error! Status: ${res.status}`);
         return res.json();
       })
       .then((payload: APIResponse) => {
