@@ -12,6 +12,7 @@ import {
   createTheme,
   MantineProvider,
   Container,
+  List,
 } from "@mantine/core";
 
 import type { APIResponse, DisplayTrend } from "./Interfaces";
@@ -225,7 +226,6 @@ export function FrontPage() {
                     >
                       About Apartment Listing History
                     </Title>
-
                     <Text
                       size="xl"
                       c="dimmed"
@@ -238,27 +238,46 @@ export function FrontPage() {
                       Making historial apartment listing trends and insights
                       accessible to the average renter
                     </Text>
-
                     <Divider my="md" color="#eef0f2" />
-
                     <Text size="lg" style={{ lineHeight: 1.7 }}>
                       The goal of this site is to equip renters with information
                       about pricing and vacancy trends for their apartment
                       complex.
                     </Text>
-
-                    <Text size="lg" style={{ lineHeight: 1.7 }}>
+                    <Text size="lg" lh={1.7} mb="md">
                       This is a hobby / passion project. So if you have a
                       suggestion, find a bug, or want to see your apartment
                       building on the list, drop me a line at
                       v.c.elzen@gmail.com. OR if you are awesome and want to
                       contribute, you can check out the steps below on how to do
-                      that. - Check out this video on how to use beautiful soup
-                      to scrap apartement data and add it to this site. - Link
-                      to the scraper repos written instructions on how to
-                      contribute can be found here.
+                      that.
                     </Text>
 
+                    <List size="lg" lh={1.7}>
+                      <List.Item>
+                        Check out this video on how to use beautiful soup to
+                        scrap apartment data:{" "}
+                        <a
+                          href="https://youtu.be/hdsz15XCM10"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          https://youtu.be/hdsz15XCM10
+                        </a>
+                      </List.Item>
+
+                      <List.Item>
+                        Link to the scraper repo's written instructions on how
+                        to contribute can be found here:{" "}
+                        <a
+                          href="https://github.com/vandev4646/Apartment_History_Scraper"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          https://github.com/vandev4646/Apartment_History_Scraper
+                        </a>
+                      </List.Item>
+                    </List>
                     <Text size="lg" style={{ lineHeight: 1.7 }}>
                       Coming soon! The ability to click into a building and see
                       trends per unit type.
