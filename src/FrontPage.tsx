@@ -98,7 +98,7 @@ export function FrontPage() {
   return (
     <MantineProvider theme={pageTheme}>
       <AppShell
-        header={{ height: 80 }}
+        header={{ height: { base: 60, sm: 80 } }}
         navbar={{
           width: 300,
           breakpoint: "sm",
@@ -118,7 +118,7 @@ export function FrontPage() {
             borderBottom: "1px solid #eef0f2",
           }}
         >
-          <Group gap="md">
+          <Group gap="sm" wrap="nowrap" style={{ overflow: "hidden" }}>
             <Burger
               opened={opened}
               onClick={toggle}
@@ -130,13 +130,21 @@ export function FrontPage() {
               color="dark"
               size="xl"
               radius="xl"
+              visibleFrom="sm"
               style={{ backgroundColor: "#f5f5f5" }}
             >
               <IconTrendingUp size={28} color="#1a1a1a" />
             </ActionIcon>
             <Title
               order={1}
-              style={{ letterSpacing: "-0.5px", color: "#1a1a1a" }}
+              size="h3"
+              style={{
+                letterSpacing: "-0.5px",
+                color: "#1a1a1a",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+              }}
+              hiddenFrom="xs"
             >
               Apartment Listing History
             </Title>
