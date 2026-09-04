@@ -6,6 +6,9 @@
   --font-geist-sans: 'Geist Variable', sans-serif;
   --font-geist-mono: 'Geist Mono Variable', monospace;
 }
+body {
+  overflow-wrap: break-word
+}
 
 
 /*

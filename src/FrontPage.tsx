@@ -144,7 +144,6 @@ export function FrontPage() {
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
               }}
-              hiddenFrom="xs"
             >
               Apartment Listing History
             </Title>
@@ -240,7 +239,7 @@ export function FrontPage() {
 
               {activeNav == "About" ? (
                 <Container size="md" px={0} py="xl">
-                  <Stack gap="xl">
+                  <Stack gap="xl" style={{ overflowWrap: "anywhere" }}>
                     <Title
                       order={2}
                       style={{
@@ -285,6 +284,10 @@ export function FrontPage() {
                           href="https://youtu.be/hdsz15XCM10"
                           target="_blank"
                           rel="noreferrer"
+                          style={{
+                            wordBreak: "break-word",
+                            overflowWrap: "anywhere",
+                          }}
                         >
                           https://youtu.be/hdsz15XCM10
                         </a>
@@ -297,6 +300,10 @@ export function FrontPage() {
                           href="https://github.com/vandev4646/Apartment_History_Scraper"
                           target="_blank"
                           rel="noreferrer"
+                          style={{
+                            wordBreak: "break-word",
+                            overflowWrap: "anywhere",
+                          }}
                         >
                           https://github.com/vandev4646/Apartment_History_Scraper
                         </a>
