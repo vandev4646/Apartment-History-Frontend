@@ -13,6 +13,7 @@ import {
   MantineProvider,
   Container,
   List,
+  Burger,
 } from "@mantine/core";
 
 import type { APIResponse, DisplayTrend } from "./Interfaces";
@@ -26,8 +27,10 @@ import {
 } from "@tabler/icons-react";
 import { DisplayCard } from "./DisplayCard";
 import "@mantine/core/styles.css";
+import { useDisclosure } from "@mantine/hooks";
 
 export function FrontPage() {
+  const [opened, { toggle }] = useDisclosure();
   const [activeNav, setActiveNav] = useState("Building");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -96,7 +99,11 @@ export function FrontPage() {
     <MantineProvider theme={pageTheme}>
       <AppShell
         header={{ height: 80 }}
-        navbar={{ width: 300, breakpoint: "sm" }}
+        navbar={{
+          width: 300,
+          breakpoint: "sm",
+          collapsed: { mobile: !opened },
+        }}
         padding={{ base: "md", sm: "xl", lg: "xl" }}
         bg="#fcfcfc"
         c="#1a1a1a"
@@ -112,6 +119,12 @@ export function FrontPage() {
           }}
         >
           <Group gap="md">
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+            />
             <ActionIcon
               variant="light"
               color="dark"
@@ -158,7 +171,10 @@ export function FrontPage() {
                   label={item.label}
                   leftSection={<Icon size={22} stroke={1.5} />}
                   active={isActive}
-                  onClick={() => setActiveNav(item.label)}
+                  onClick={() => {
+                    setActiveNav(item.label);
+                    if (opened) toggle();
+                  }}
                   variant="subtle"
                   color="dark"
                   fw={isActive ? 700 : 400}

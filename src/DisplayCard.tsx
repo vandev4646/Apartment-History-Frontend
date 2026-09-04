@@ -22,7 +22,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
           <Paper
             key={stat.n}
             withBorder
-            p="xl"
+            p={{ base: "md", sm: "xl" }}
             radius="md"
             shadow="sm"
             style={{
@@ -34,7 +34,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
               {/* Header */}
               <Text
                 fw={700}
-                fz="28"
+                fz={28}
                 style={{
                   //fontFamily: "Georgia, serif",
                   color: "#1a1a1a",
@@ -47,7 +47,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
               <Divider style={{ borderColor: "#f1f3f5" }} />
 
               {/* Metrics Grid */}
-              <SimpleGrid cols={2} spacing="sm">
+              <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="sm">
                 {/* Average Openings Segment */}
                 <Stack gap={4}>
                   <Text c="dimmed" tt="uppercase" fw={700} fz="md" lts="0.5px">
@@ -57,7 +57,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                   <Group gap="xs" align="baseline">
                     <Text
                       fw={700}
-                      fz="24"
+                      fz={24}
                       style={{ color: "#1a1a1a", letterSpacing: "-1px" }}
                     >
                       {stat.aov}
@@ -105,7 +105,7 @@ export function DisplayCard({ data }: { data: DisplayTrend[] }) {
                   <Group gap="xs" align="baseline">
                     <Text
                       fw={700}
-                      fz="24"
+                      fz={24}
                       style={{ color: "#1a1a1a", letterSpacing: "-1px" }}
                     >
                       {stat.adv}
